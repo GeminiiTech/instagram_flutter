@@ -3,7 +3,9 @@ import 'package:instagram/model/post.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
-  PostCard({super.key, required this.post});
+  final void Function()? onPressed;
+  final bool? isLiked;
+  PostCard({super.key, required this.post, required this.onPressed,required this.isLiked});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,12 @@ class PostCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 18,
                     backgroundImage: AssetImage('lib/images/img1.jpg'),
                     backgroundColor: Colors.red,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Text(
@@ -34,44 +36,51 @@ class PostCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Icon(Icons.more_horiz)
+              const Icon(Icons.more_horiz)
             ],
           ),
 
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
           //shoe pic
           Image.asset(post.userPost),
 
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
 
           Row(
             children: [
-              Icon(Icons.favorite_outline),
-              SizedBox(
+              IconButton(
+                  onPressed: onPressed,
+                  icon:Icon(
+
+                  isLiked! ? Icons.favorite_border:Icons.favorite
+                  )
+                  
+                  ),
+              const Icon(Icons.chat_bubble_outline),
+              const SizedBox(
                 width: 15.0,
               ),
-              Icon(Icons.chat_bubble_outline),
-              SizedBox(
-                width: 15.0,
+              const Icon(Icons.send_sharp),
+              const SizedBox(
+                width: 200.0,
               ),
-              Icon(Icons.send_sharp),
-              SizedBox(
-                width: 230.0,
-              ),
-              Icon(
-                Icons.bookmark_outline,
+               IconButton(
+                onPressed: onPressed,
+                icon: Icon(
+                isLiked! ?  Icons.bookmark_outline: Icons.bookmark
+                ),
                 color: Colors.black,
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -80,10 +89,10 @@ class PostCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 8.0,
           ),
-          Row(
+          const Row(
             children: [
               Text(
                 'etty_k',
@@ -93,15 +102,15 @@ class PostCard extends StatelessWidget {
                 width: 2,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: EdgeInsets.symmetric(vertical: 8),
                 child: Text('The earth has such a beautiful view from space'),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          Row(
+          const Row(
             children: [
               Text(
                 'View all 167 comments',
@@ -109,7 +118,7 @@ class PostCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           ),
         ],

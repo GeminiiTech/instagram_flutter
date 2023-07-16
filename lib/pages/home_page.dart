@@ -7,8 +7,20 @@ import '../model/post.dart';
 
 // import '../components/ig_story.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool _isLiked = true;
+  void toogleLike() {
+    setState(() {
+      _isLiked = !_isLiked;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +56,18 @@ class HomePage extends StatelessWidget {
       body: Container(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
+            // Expanded(
+            //   child: ListView.builder(
+            //     scrollDirection: Axis.horizontal,
+            //     itemCount: 5,
+            //     itemBuilder: (context, index) {
+            //     return Story(
+            //         userStory: "Your Story", userImg: "lib/images/img1.jpg");
+            //   }),
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -56,7 +77,7 @@ class HomePage extends StatelessWidget {
                 Story(userStory: "messi.l", userImg: "lib/images/space.jpg"),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 35,
             ),
             Expanded(
@@ -67,6 +88,8 @@ class HomePage extends StatelessWidget {
                     Post(username: 'etty_k', userPost: "lib/images/space.jpg");
                 return PostCard(
                   post: post,
+                  onPressed: () => toogleLike(),
+                  isLiked: _isLiked,
                 );
               },
             ))
